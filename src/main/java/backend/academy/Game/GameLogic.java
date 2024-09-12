@@ -15,6 +15,17 @@ public class GameLogic {
         this.attempts = attempts;
     }
 
+    private ArrayList<Integer> getAllIndexesInWord(String word, String symbol) {
+        ArrayList<Integer> indexList = new ArrayList<>();
+        int index = word.indexOf(symbol);
+        while (index >= 0) {
+            indexList.add(index);
+            index = word.indexOf(symbol, index + 1);
+        }
+
+        return indexList;
+
+    }
     public void game() {
 
 
