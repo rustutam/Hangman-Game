@@ -1,9 +1,5 @@
 package backend.academy.Game;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Game {
     //получает настройки и создает gamelogic
