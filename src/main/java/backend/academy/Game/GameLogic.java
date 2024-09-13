@@ -14,6 +14,7 @@ public class GameLogic {
     public GameLogic(String word, Integer attempts) {
         this.word = word;
         this.attempts = attempts;
+        hiddenWord = "_".repeat(word.length());
     }
 
     private ArrayList<Integer> getAllIndexesInWord(String word, String symbol) {
@@ -32,12 +33,13 @@ public class GameLogic {
         List<Integer> findIndexes = getAllIndexesInWord(word, inputSymbol);
         if (findIndexes.isEmpty()) {
             usedSymbolsSet.add(inputSymbol);
+            attempts--;
         } else {
             for (Integer index : findIndexes) {
                 hiddenWord = hiddenWord.substring(0, index) + inputSymbol + hiddenWord.substring(index + 1);
             }
         }
-        attempts --;
+
 //        while (attempts > 0) {
 //            gallowsVisualizer.drawInterface(0);
 //            inputSymbol = playerInput.getInput();
