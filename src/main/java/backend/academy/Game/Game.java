@@ -20,12 +20,12 @@ public class Game {
 
     public void start(){
         GameLogic gameLogic = new GameLogic("rustam", 7);
-        System.out.println(gameLogic.getGameInformarion());
+        System.out.println(gameLogic.getGameInformation());
         while (gameLogic.getAttempts() > 0){
             String inputSymbol = playerInputHandler.getInput();
             gameLogic.gameElementsHandler(inputSymbol);
 
-            System.out.println(gameLogic.getGameInformarion());
+            System.out.println(gameLogic.getGameInformation());
 
         }
     }
