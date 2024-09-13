@@ -27,10 +27,10 @@ public class SettingsProvider {
     private String getLevel() {
         while (true) {
             String userInputLevel = userInput.getInputLevel(levels);
-            if (categories.contains(userInputLevel)) {
+            if (levels.contains(userInputLevel)) {
                 return userInputLevel;
             } else {
-                System.out.println("Неверная категория. Выберите из списка.");
+                System.out.println("Неверный уровень сложности. Выберите из списка.");
             }
         }
     }
