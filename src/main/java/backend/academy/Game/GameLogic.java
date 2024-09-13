@@ -66,4 +66,10 @@ public class GameLogic {
     public String getHiddenWord() {
         return hiddenWord;
     }
+
+    public String getGameInformartion() {
+        return "Hidden word: " + hiddenWord + "\n" +
+            "Used symbols: " + usedSymbolsSet + "\n" +
+            "Attempts: " + attempts;
+    }
 }
