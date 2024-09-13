@@ -28,20 +28,39 @@ public class GameLogic {
 
     }
 
-    public void game() {
-
-        while (attempts > 0) {
-            gallowsVisualizer.drawInterface(0);
-            userInput = playerInput.getInput();
-            ArrayList<Integer> indexes = getAllIndexesInWord(word, userInput);
-            attempts--;
-            if (indexes.isEmpty()) {
-                usedSymbolsSet.add(userInput);
-            } else {
-                for (Integer index : indexes) {
-                    hiddenWord = hiddenWord.substring(0, index) + userInput + hiddenWord.substring(index + 1);
-                }
+    public void gameElementsHandler(String inputSymbol) {
+        List<Integer> findIndexes = getAllIndexesInWord(word, inputSymbol);
+        if (findIndexes.isEmpty()) {
+            usedSymbolsSet.add(inputSymbol);
+        } else {
+            for (Integer index : findIndexes) {
+                hiddenWord = hiddenWord.substring(0, index) + inputSymbol + hiddenWord.substring(index + 1);
             }
         }
+        attempts --;
+//        while (attempts > 0) {
+//            gallowsVisualizer.drawInterface(0);
+//            inputSymbol = playerInput.getInput();
+//            ArrayList<Integer> indexes = getAllIndexesInWord(word, inputSymbol);
+//            attempts--;
+//            if (indexes.isEmpty()) {
+//                usedSymbolsSet.add(inputSymbol);
+//            } else {
+//                for (Integer index : indexes) {
+//                    hiddenWord = hiddenWord.substring(0, index) + inputSymbol + hiddenWord.substring(index + 1);
+//                }
+//            }
+//        }
     }
+
+
+
+    public HashSet<String> getUsedSymbolsSet(){
+        return usedSymbolsSet;
+    }
+
+    public Integer getAttempts() {
+        return attempts;
+    }
+
 }
