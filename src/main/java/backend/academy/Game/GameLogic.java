@@ -1,5 +1,6 @@
 package backend.academy.Game;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class GameLogic {
@@ -26,16 +27,21 @@ public class GameLogic {
         return indexList;
 
     }
+
     public void game() {
 
-
-
-        while (attempts>0){
+        while (attempts > 0) {
             gallowsVisualizer.drawInterface(0);
             userInput = playerInput.getInput();
-
-
-
+            ArrayList<Integer> indexes = getAllIndexesInWord(word, userInput);
+            attempts--;
+            if (indexes.isEmpty()) {
+                usedSymbolsSet.add(userInput);
+            } else {
+                for (Integer index : indexes) {
+                    hiddenWord = hiddenWord.substring(0, index) + userInput + hiddenWord.substring(index + 1);
+                }
+            }
         }
     }
 }
