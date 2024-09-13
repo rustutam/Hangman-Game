@@ -53,9 +53,7 @@ public class GameLogic {
 //        }
     }
 
-
-
-    public HashSet<String> getUsedSymbolsSet(){
+    public HashSet<String> getUsedSymbolsSet() {
         return usedSymbolsSet;
     }
 
@@ -63,4 +61,7 @@ public class GameLogic {
         return attempts;
     }
 
+    public String getHiddenWord() {
+        return hiddenWord;
+    }
 }
