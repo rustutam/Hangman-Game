@@ -1,15 +1,15 @@
 package backend.academy.Game;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashSet;
 
 public class GameLogic {
     private String word;
     private Integer attempts;
-    private String userInput;
+
+    private String hiddenWord;
     private HashSet<String> usedSymbolsSet = new HashSet<>();
-    ConsoleInputProvider playerInput = new ConsoleInputProvider();
-    GallowsVisualizer gallowsVisualizer = new GallowsVisualizer();
 
     public GameLogic(String word, Integer attempts) {
         this.word = word;
@@ -17,8 +17,8 @@ public class GameLogic {
         hiddenWord = "_".repeat(word.length());
     }
 
-    private ArrayList<Integer> getAllIndexesInWord(String word, String symbol) {
-        ArrayList<Integer> indexList = new ArrayList<>();
+    private List<Integer> getAllIndexesInWord(String word, String symbol) {
+        List<Integer> indexList = new ArrayList<>();
         int index = word.indexOf(symbol);
         while (index >= 0) {
             indexList.add(index);
@@ -39,20 +39,6 @@ public class GameLogic {
                 hiddenWord = hiddenWord.substring(0, index) + inputSymbol + hiddenWord.substring(index + 1);
             }
         }
-
-//        while (attempts > 0) {
-//            gallowsVisualizer.drawInterface(0);
-//            inputSymbol = playerInput.getInput();
-//            ArrayList<Integer> indexes = getAllIndexesInWord(word, inputSymbol);
-//            attempts--;
-//            if (indexes.isEmpty()) {
-//                usedSymbolsSet.add(inputSymbol);
-//            } else {
-//                for (Integer index : indexes) {
-//                    hiddenWord = hiddenWord.substring(0, index) + inputSymbol + hiddenWord.substring(index + 1);
-//                }
-//            }
-//        }
     }
 
     public HashSet<String> getUsedSymbolsSet() {
