@@ -1,8 +1,10 @@
 package backend.academy.Game;
 
+import java.util.HashSet;
+
 public class GallowsVisualizer {
 
-    private void drawGallowsStates(Integer state){
+    private void drawGallowsStates(Integer state) {
         switch (state) {
             case 0:
                 System.out.println("  _______");
@@ -83,16 +85,38 @@ public class GallowsVisualizer {
                 System.out.println("_|___");
                 break;
 
-
         }
     }
 
-    public void drawInterface(Integer state){
+    private void displayGameStatus(GameStatus gameStatus, Integer attempts) {
+        switch (gameStatus) {
+            case PLAYING:
+                System.out.println("Осталось попыток: " + attempts);
+                break;
+
+            case WIN:
+                System.out.println("Поздравляю, вы выиграли!");
+                break;
+
+            case LOSE:
+                System.out.println("Вы проиграли");
+                break;
+        }
+    }
+
+    public void drawInterface(
+        Integer state,
+        GameStatus gameStatus,
+        String hiddenWord,
+        HashSet<String> usedSymbolsSet,
+        Integer attempts
+    ) {
+        System.out.println("\n".repeat(20));
         System.out.println("Игра виселица");
-        System.out.println("Слово: ");
-        System.out.println("Использованные буквы:");
+        System.out.println("Слово: " + hiddenWord);
+        System.out.println("Использованные символы: " + usedSymbolsSet);
         drawGallowsStates(state);
-        System.out.println("Осталось попыток:");
+        displayGameStatus(gameStatus, attempts);
     }
 }
 
