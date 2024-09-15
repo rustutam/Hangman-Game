@@ -17,11 +17,20 @@ public class Game {
     public void start(){
         GameLogic gameLogic = new GameLogic("rustam", 7);
         System.out.println(gameLogic.getGameInformation());
-        while (gameLogic.getAttempts() > 0){
+        while (true) {
             String inputSymbol = playerInputHandler.getInput();
             gameLogic.gameElementsHandler(inputSymbol);
 
             System.out.println(gameLogic.getGameInformation());
+            if (gameLogic.getGameStatus() == GameStatus.WIN){
+                System.out.println("WIN");
+                break;
+            }
+            else if (gameLogic.getGameStatus() == GameStatus.LOSE){
+                System.out.println("Losee");
+                break;
+            }
+
 
         }
     }

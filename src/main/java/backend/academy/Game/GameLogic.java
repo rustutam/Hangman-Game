@@ -7,7 +7,7 @@ import java.util.HashSet;
 public class GameLogic {
     private String word;
     private Integer attempts;
-
+    private GameStatus gameStatus = GameStatus.PLAYING;
     private String hiddenWord;
     private HashSet<String> usedSymbolsSet = new HashSet<>();
 
@@ -39,10 +39,22 @@ public class GameLogic {
                 hiddenWord = hiddenWord.substring(0, index) + inputSymbol + hiddenWord.substring(index + 1);
             }
         }
+
+        if (hiddenWord.equals(word)) {
+            gameStatus = GameStatus.WIN;
+        }
+
+        if (attempts <= 0) {
+            gameStatus = GameStatus.LOSE;
+        }
     }
 
     public HashSet<String> getUsedSymbolsSet() {
         return usedSymbolsSet;
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 
     public Integer getAttempts() {
