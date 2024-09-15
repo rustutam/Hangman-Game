@@ -8,7 +8,7 @@ public class ConsoleInputProvider implements InputProvider {
     @Override
     public String getInput() {
         System.out.print("Введите букву: ");
-        return scanner.nextLine();
+        return scanner.nextLine().toUpperCase();
     }
 
     public String getInputCategory(List<String> categories) {
