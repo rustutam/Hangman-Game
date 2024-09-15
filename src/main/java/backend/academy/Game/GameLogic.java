@@ -77,6 +77,7 @@ public class GameLogic {
     public String getGameInformation() {
         return "Hidden word: " + hiddenWord + "\n" +
             "Used symbols: " + usedSymbolsSet + "\n" +
-            "Attempts: " + attempts;
+            "Attempts: " + attempts + "\n" +
+            "Gallows state: " + gallowsState;
     }
 }
