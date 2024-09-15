@@ -19,7 +19,9 @@ public class Game {
         System.out.println(gameLogic.getGameInformation());
         while (true) {
             String inputSymbol = playerInputHandler.getInput();
-            gameLogic.gameElementsHandler(inputSymbol);
+            if (inputSymbol.length() == 1) {
+
+                gameLogic.gameElementsHandler(inputSymbol);
 
             System.out.println(gameLogic.getGameInformation());
             if (gameLogic.getGameStatus() == GameStatus.WIN){
