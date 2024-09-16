@@ -88,7 +88,7 @@ public class GallowsVisualizer {
         }
     }
 
-    private void displayGameStatus(GameStatus gameStatus, Integer attempts) {
+    private void displayGameStatus(GameStatus gameStatus, Integer attempts, String word) {
         switch (gameStatus) {
             case PLAYING:
                 System.out.println("Осталось попыток: " + attempts);
@@ -100,6 +100,7 @@ public class GallowsVisualizer {
 
             case LOSE:
                 System.out.println("Вы проиграли");
+                System.out.println("Было загадано слово: " + word);
                 break;
         }
     }
@@ -108,6 +109,7 @@ public class GallowsVisualizer {
         Integer state,
         GameStatus gameStatus,
         String hiddenWord,
+        String word,
         HashSet<String> usedSymbolsSet,
         Integer attempts
     ) {
@@ -116,7 +118,7 @@ public class GallowsVisualizer {
         System.out.println("Слово: " + hiddenWord);
         System.out.println("Использованные символы: " + usedSymbolsSet);
         drawGallowsStates(state);
-        displayGameStatus(gameStatus, attempts);
+        displayGameStatus(gameStatus, attempts, word);
     }
 }
 

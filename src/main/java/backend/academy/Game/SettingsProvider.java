@@ -3,19 +3,26 @@ package backend.academy.Game;
 import java.util.List;
 
 public class SettingsProvider {
-    private final int MAX_ATTEMPTS = 7;
-    private String word;
+    public final int MAX_ATTEMPTS = 7;
 
-    private String dictionaryPath = "src/main/java/backend/academy/Game/dictionary.json";
+    private final List<String> categories;
+    private List<String> levels;
 
-    private ConsoleInputProvider userInput = new ConsoleInputProvider();
-    private DictionaryLoader loader = new DictionaryLoader(dictionaryPath);
-    private List<String> categories = loader.getCategories();
-    private List<String> levels = loader.getLevel();
+    private final InputSettingsProvider inputSettingsProvider;
+    private final DictionaryLoader dictionaryLoader;
+
+    public SettingsProvider(
+        InputSettingsProvider inputSettingsProvider,
+        DictionaryLoader dictionaryLoader
+    ) {
+        this.inputSettingsProvider = inputSettingsProvider;
+        this.dictionaryLoader = dictionaryLoader;
+        categories = dictionaryLoader.getCategoriesList();
+    }
 
     private String getCategory() {
         while (true) {
-            String userInputCategory = userInput.getInputCategory(categories);
+            String userInputCategory = inputSettingsProvider.getInputCategory(categories);
             if (categories.contains(userInputCategory)) {
                 return userInputCategory;
             } else {
@@ -26,7 +33,7 @@ public class SettingsProvider {
 
     private String getLevel() {
         while (true) {
-            String userInputLevel = userInput.getInputLevel(levels);
+            String userInputLevel = inputSettingsProvider.getInputLevel(levels);
             if (levels.contains(userInputLevel)) {
                 return userInputLevel;
             } else {
@@ -37,12 +44,10 @@ public class SettingsProvider {
 
     public String getWord() {
         String category = getCategory();
+        levels = dictionaryLoader.getLevelsList(category);
         String level = getLevel();
-        word = loader.getRandomWord(category, level);
-        return word;
-    }
-
-    public int getMaxAttempts() {
-        return MAX_ATTEMPTS;
+        List<String> wordsList = dictionaryLoader.getWordsList(category, level);
+        RandomValueProvider randomValueProvider = new RandomValueProvider(wordsList);
+        return randomValueProvider.getRandomValue();
     }
 }

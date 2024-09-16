@@ -17,12 +17,11 @@ public class DictionaryLoader {
         try {
             dictionary = objectMapper.readTree(new File(filePath));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
-
-    public List<String> getCategories() {
+    public List<String> getCategoriesList() {
         List<String> categoriesList = new ArrayList<>();
         JsonNode categoriesNode = dictionary.path("categories");
         Iterator<String> fieldNames = categoriesNode.fieldNames();
@@ -33,10 +32,9 @@ public class DictionaryLoader {
         return categoriesList;
     }
 
-    public List<String> getLevel(){
-        List<String> categoriesList = getCategories();
+    public List<String> getLevelsList(String category) {
         List<String> levelList = new ArrayList<>();
-        JsonNode levelNode = dictionary.path("categories").path(categoriesList.getFirst());
+        JsonNode levelNode = dictionary.path("categories").path(category);
         Iterator<String> fieldNames = levelNode.fieldNames();
         while (fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
@@ -45,7 +43,7 @@ public class DictionaryLoader {
         return levelList;
     }
 
-    public String getRandomWord(String category, String level){
+    public List<String> getWordsList(String category, String level) {
         List<String> words = new ArrayList<>();
         JsonNode wordsNode = dictionary.path("categories").path(category).path(level);
         if (wordsNode.isArray()) {
@@ -53,23 +51,6 @@ public class DictionaryLoader {
                 words.add(wordNode.asText());
             }
         }
-        RandomValueProvider random = new RandomValueProvider(words);
-        return random.getRandomValue();
-    }
-
-
-
-
-
-    public static void main(String[] args) {
-
-        String dictionaryPath = "src/main/java/backend/academy/Game/dictionary.json";
-        DictionaryLoader loader = new DictionaryLoader(dictionaryPath);
-        List<String> categories = loader.getCategories();
-        List<String> levels = loader.getLevel();
-
-        System.out.println(categories);
-        System.out.println(levels);
-        System.out.println(loader.getRandomWord("animals", "easy"));
+        return words;
     }
 }
