@@ -1,8 +1,11 @@
 package backend.academy.Game;
 
+import java.io.PrintStream;
 import java.util.List;
 
 public class SettingsProvider {
+    private final PrintStream out;
+
     public final int maxAttempts = 7;
 
     private final InputSettingsProvider inputSettingsProvider;
@@ -10,9 +13,11 @@ public class SettingsProvider {
     RandomValueProvider randomValueProvider;
 
     public SettingsProvider(
+        PrintStream out,
         InputSettingsProvider inputSettingsProvider,
         DictionaryLoader dictionaryLoader
     ) {
+        this.out = out;
         this.inputSettingsProvider = inputSettingsProvider;
         this.dictionaryLoader = dictionaryLoader;
     }
@@ -26,7 +31,7 @@ public class SettingsProvider {
             } else if (categoriesList.contains(userInputCategory)) {
                 return userInputCategory;
             } else {
-                System.out.println("Неверная категория. Выберите из списка.");
+                out.println("Неверная категория. Выберите из списка.");
             }
         }
     }
@@ -40,7 +45,7 @@ public class SettingsProvider {
             } else if (levelsList.contains(userInputLevel)) {
                 return userInputLevel;
             } else {
-                System.out.println("Неверный уровень сложности. Выберите из списка.");
+                out.println("Неверный уровень сложности. Выберите из списка.");
             }
         }
     }

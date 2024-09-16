@@ -1,88 +1,94 @@
 package backend.academy.Game;
 
+import java.io.PrintStream;
 import java.util.HashSet;
 
 public class GallowsVisualizer {
+    private final PrintStream out;
+
+    public GallowsVisualizer(PrintStream out) {
+        this.out = out;
+    }
 
     private void drawGallowsStates(GallowsState state) {
         switch (state) {
             case EMPTY:
-                System.out.println("  _______");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println("_|___");
+                out.println("  _______");
+                out.println(" |");
+                out.println(" |");
+                out.println(" |");
+                out.println(" |");
+                out.println(" |");
+                out.println("_|___");
                 break;
 
             case ROPE:
-                System.out.println("  _______");
-                System.out.println(" |      |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println("_|___");
+                out.println("  _______");
+                out.println(" |      |");
+                out.println(" |");
+                out.println(" |");
+                out.println(" |");
+                out.println(" |");
+                out.println("_|___");
                 break;
 
             case HEAD:
-                System.out.println("  _______");
-                System.out.println(" |      |");
-                System.out.println(" |     ( )");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println("_|___");
+                out.println("  _______");
+                out.println(" |      |");
+                out.println(" |     ( )");
+                out.println(" |");
+                out.println(" |");
+                out.println(" |");
+                out.println("_|___");
                 break;
 
             case BODY:
-                System.out.println("  _______");
-                System.out.println(" |      |");
-                System.out.println(" |     ( )");
-                System.out.println(" |      |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println("_|___");
+                out.println("  _______");
+                out.println(" |      |");
+                out.println(" |     ( )");
+                out.println(" |      |");
+                out.println(" |");
+                out.println(" |");
+                out.println("_|___");
                 break;
 
             case ONE_ARM:
-                System.out.println("  _______");
-                System.out.println(" |      |");
-                System.out.println(" |     ( )");
-                System.out.println(" |     /|");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println("_|___");
+                out.println("  _______");
+                out.println(" |      |");
+                out.println(" |     ( )");
+                out.println(" |     /|");
+                out.println(" |");
+                out.println(" |");
+                out.println("_|___");
                 break;
             case BOTH_ARMS:
-                System.out.println("  _______");
-                System.out.println(" |      |");
-                System.out.println(" |     ( )");
-                System.out.println(" |     /|\\");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println("_|___");
+                out.println("  _______");
+                out.println(" |      |");
+                out.println(" |     ( )");
+                out.println(" |     /|\\");
+                out.println(" |");
+                out.println(" |");
+                out.println("_|___");
                 break;
 
             case ONE_LEG:
-                System.out.println("  _______");
-                System.out.println(" |      |");
-                System.out.println(" |     ( )");
-                System.out.println(" |     /|\\");
-                System.out.println(" |     /");
-                System.out.println(" |");
-                System.out.println("_|___");
+                out.println("  _______");
+                out.println(" |      |");
+                out.println(" |     ( )");
+                out.println(" |     /|\\");
+                out.println(" |     /");
+                out.println(" |");
+                out.println("_|___");
                 break;
 
             case FULL_GALLOWS:
-                System.out.println("  _______");
-                System.out.println(" |      |");
-                System.out.println(" |     ( )");
-                System.out.println(" |     /|\\");
-                System.out.println(" |     / \\");
-                System.out.println(" |");
-                System.out.println("_|___");
+                out.println("  _______");
+                out.println(" |      |");
+                out.println(" |     ( )");
+                out.println(" |     /|\\");
+                out.println(" |     / \\");
+                out.println(" |");
+                out.println("_|___");
                 break;
 
         }
@@ -91,16 +97,16 @@ public class GallowsVisualizer {
     private void displayGameStatus(GameStatus gameStatus, Integer attempts, String word) {
         switch (gameStatus) {
             case PLAYING:
-                System.out.println("Осталось попыток: " + attempts);
+                out.println("Осталось попыток: " + attempts);
                 break;
 
             case WIN:
-                System.out.println("Поздравляю, вы выиграли!");
+                out.println("Поздравляю, вы выиграли!");
                 break;
 
             case LOSE:
-                System.out.println("Вы проиграли");
-                System.out.println("Было загадано слово: " + word);
+                out.println("Вы проиграли");
+                out.println("Было загадано слово: " + word);
                 break;
         }
     }
@@ -113,10 +119,10 @@ public class GallowsVisualizer {
         HashSet<String> usedSymbolsSet,
         Integer attempts
     ) {
-        System.out.println("\n".repeat(20));
-        System.out.println("Игра виселица");
-        System.out.println("Слово: " + hiddenWord);
-        System.out.println("Использованные символы: " + usedSymbolsSet);
+        out.println("\n".repeat(20));
+        out.println("Игра виселица");
+        out.println("Слово: " + hiddenWord);
+        out.println("Использованные символы: " + usedSymbolsSet);
         drawGallowsStates(state);
         displayGameStatus(gameStatus, attempts, word);
     }

@@ -1,13 +1,21 @@
 package backend.academy.Game;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class ConsoleInputProvider implements InputProvider {
-    Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+    private final PrintStream out;
+
+    public ConsoleInputProvider(InputStream in, PrintStream out) {
+        this.scanner = new Scanner(in);
+        this.out = out;
+    }
 
     @Override
     public String getInput(String message) {
-        System.out.print(message + " ");
+        out.print(message + " ");
         return scanner.nextLine().toUpperCase();
     }
 }

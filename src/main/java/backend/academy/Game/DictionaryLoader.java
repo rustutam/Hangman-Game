@@ -2,6 +2,7 @@ package backend.academy.Game;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,12 +14,12 @@ public class DictionaryLoader {
     private static final String CATEGORIES = "categories";
     private JsonNode dictionary;
 
-    public DictionaryLoader(String filePath) {
+    public DictionaryLoader(String filePath, PrintStream out) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             dictionary = objectMapper.readTree(new File(filePath));
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            out.println(e.getMessage());
         }
     }
 
