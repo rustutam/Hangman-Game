@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 public class GallowsVisualizer {
     private final PrintStream out;
+    private static final int LINE_SEPARATOR_COUNT = 20;
 
     public GallowsVisualizer(PrintStream out) {
         this.out = out;
@@ -13,82 +14,108 @@ public class GallowsVisualizer {
     private void drawGallowsStates(GallowsState state) {
         switch (state) {
             case EMPTY:
-                out.println("  _______");
-                out.println(" |");
-                out.println(" |");
-                out.println(" |");
-                out.println(" |");
-                out.println(" |");
-                out.println("_|___");
+                out.println(
+                    """
+                          _______
+                         |
+                         |
+                         |
+                         |
+                         |
+                        _|___"""
+                );
                 break;
 
             case ROPE:
-                out.println("  _______");
-                out.println(" |      |");
-                out.println(" |");
-                out.println(" |");
-                out.println(" |");
-                out.println(" |");
-                out.println("_|___");
+                out.println(
+                    """
+                          _______
+                         |      |
+                         |
+                         |
+                         |
+                         |
+                        _|___"""
+                );
                 break;
 
             case HEAD:
-                out.println("  _______");
-                out.println(" |      |");
-                out.println(" |     ( )");
-                out.println(" |");
-                out.println(" |");
-                out.println(" |");
-                out.println("_|___");
+                out.println(
+                    """
+                          _______
+                         |      |
+                         |     ( )
+                         |
+                         |
+                         |
+                        _|___"""
+                );
                 break;
 
             case BODY:
-                out.println("  _______");
-                out.println(" |      |");
-                out.println(" |     ( )");
-                out.println(" |      |");
-                out.println(" |");
-                out.println(" |");
-                out.println("_|___");
+                out.println(
+                    """
+                          _______
+                         |      |
+                         |     ( )
+                         |      |
+                         |
+                         |
+                        _|___"""
+                );
                 break;
 
             case ONE_ARM:
-                out.println("  _______");
-                out.println(" |      |");
-                out.println(" |     ( )");
-                out.println(" |     /|");
-                out.println(" |");
-                out.println(" |");
-                out.println("_|___");
+                out.println(
+                    """
+                          _______
+                         |      |
+                         |     ( )
+                         |     /|
+                         |
+                         |
+                        _|___"""
+                );
                 break;
             case BOTH_ARMS:
-                out.println("  _______");
-                out.println(" |      |");
-                out.println(" |     ( )");
-                out.println(" |     /|\\");
-                out.println(" |");
-                out.println(" |");
-                out.println("_|___");
+                out.println(
+                    """
+                          _______
+                         |      |
+                         |     ( )
+                         |     /|\\
+                         |
+                         |
+                        _|___"""
+                );
                 break;
 
             case ONE_LEG:
-                out.println("  _______");
-                out.println(" |      |");
-                out.println(" |     ( )");
-                out.println(" |     /|\\");
-                out.println(" |     /");
-                out.println(" |");
-                out.println("_|___");
+                out.println(
+                    """
+                          _______
+                         |      |
+                         |     ( )
+                         |     /|\\
+                         |     /
+                         |
+                        _|___"""
+                );
                 break;
 
             case FULL_GALLOWS:
-                out.println("  _______");
-                out.println(" |      |");
-                out.println(" |     ( )");
-                out.println(" |     /|\\");
-                out.println(" |     / \\");
-                out.println(" |");
-                out.println("_|___");
+                out.println(
+                    """
+                          _______
+                         |      |
+                         |     ( )
+                         |     /|\\
+                         |     / \\
+                         |
+                        _|___"""
+                );
+                break;
+            default:
                 break;
 
         }
@@ -108,6 +135,9 @@ public class GallowsVisualizer {
                 out.println("Вы проиграли");
                 out.println("Было загадано слово: " + word);
                 break;
+
+            default:
+                break;
         }
     }
 
@@ -119,7 +149,7 @@ public class GallowsVisualizer {
         HashSet<String> usedSymbolsSet,
         Integer attempts
     ) {
-        out.println("\n".repeat(20));
+        out.println("\n".repeat(LINE_SEPARATOR_COUNT));
         out.println("Игра виселица");
         out.println("Слово: " + hiddenWord);
         out.println("Использованные символы: " + usedSymbolsSet);
