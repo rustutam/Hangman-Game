@@ -23,8 +23,8 @@ public class Game {
         );
     }
 
-    public void start(String word, Integer MAX_ATTEMPTS) {
-        GameLogic gameLogic = new GameLogic(word, MAX_ATTEMPTS);
+    public void start(String word, Integer maxAttempts) {
+        GameLogic gameLogic = new GameLogic(word, maxAttempts);
         while (true) {
             drawGameInterface(gameLogic);
             String inputSymbol = inputGameProvider.getInputSymbol();

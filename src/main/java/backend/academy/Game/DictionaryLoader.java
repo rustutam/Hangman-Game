@@ -1,15 +1,16 @@
 package backend.academy.Game;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class DictionaryLoader {
+    private static final String CATEGORIES = "categories";
     private JsonNode dictionary;
 
     public DictionaryLoader(String filePath) {
@@ -23,7 +24,7 @@ public class DictionaryLoader {
 
     public List<String> getCategoriesList() {
         List<String> categoriesList = new ArrayList<>();
-        JsonNode categoriesNode = dictionary.path("categories");
+        JsonNode categoriesNode = dictionary.path(CATEGORIES);
         Iterator<String> fieldNames = categoriesNode.fieldNames();
         while (fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
@@ -34,7 +35,7 @@ public class DictionaryLoader {
 
     public List<String> getLevelsList(String category) {
         List<String> levelList = new ArrayList<>();
-        JsonNode levelNode = dictionary.path("categories").path(category);
+        JsonNode levelNode = dictionary.path(CATEGORIES).path(category);
         Iterator<String> fieldNames = levelNode.fieldNames();
         while (fieldNames.hasNext()) {
             String fieldName = fieldNames.next();
@@ -45,7 +46,7 @@ public class DictionaryLoader {
 
     public List<String> getWordsList(String category, String level) {
         List<String> words = new ArrayList<>();
-        JsonNode wordsNode = dictionary.path("categories").path(category).path(level);
+        JsonNode wordsNode = dictionary.path(CATEGORIES).path(category).path(level);
         if (wordsNode.isArray()) {
             for (JsonNode wordNode : wordsNode) {
                 words.add(wordNode.asText());

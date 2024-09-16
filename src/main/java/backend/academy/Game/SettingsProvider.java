@@ -3,7 +3,7 @@ package backend.academy.Game;
 import java.util.List;
 
 public class SettingsProvider {
-    public final int MAX_ATTEMPTS = 7;
+    public final int maxAttempts = 7;
 
     private final InputSettingsProvider inputSettingsProvider;
     private final DictionaryLoader dictionaryLoader;

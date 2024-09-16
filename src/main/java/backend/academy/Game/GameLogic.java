@@ -1,9 +1,10 @@
 package backend.academy.Game;
 
-import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashSet;
+
+import lombok.Getter;
 
 public class GameLogic {
     private static final double GALLOWS_STATES_COUNT = 7.0;
@@ -17,7 +18,7 @@ public class GameLogic {
 
     public GameLogic(String word, Integer attempts) {
         this.word = word;
-        this.MAX_ATTEMPTS = attempts;
+        this.maxAttempts = attempts;
         this.attempts = attempts;
         hiddenWord = "_".repeat(word.length());
     }

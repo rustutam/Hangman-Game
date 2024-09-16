@@ -13,9 +13,9 @@ public class App {
 
     public void start() {
         String word = settingsProvider.getWord();
-        Integer MAX_ATTEMPTS = settingsProvider.MAX_ATTEMPTS;
+        Integer maxAttempts = settingsProvider.maxAttempts;
 
-        game.start(word, MAX_ATTEMPTS);
+        game.start(word, maxAttempts);
     }
 
 }
