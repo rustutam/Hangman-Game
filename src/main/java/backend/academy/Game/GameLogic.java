@@ -1,10 +1,10 @@
 package backend.academy.Game;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashSet;
-
+import java.util.List;
 import lombok.Getter;
+
 
 public class GameLogic {
     private static final double GALLOWS_STATES_COUNT = 7.0;
