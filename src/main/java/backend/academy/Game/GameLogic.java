@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.HashSet;
 
 public class GameLogic {
-    private final int MAX_ATTEMPTS;
+    private static final double GALLOWS_STATES_COUNT = 7.0;
+    private final int maxAttempts;
     @Getter private final String word;
     @Getter private Integer attempts;
     @Getter private GameStatus gameStatus = GameStatus.PLAYING;
     @Getter private String hiddenWord;
     @Getter private HashSet<String> usedSymbolsSet = new HashSet<>();
-    @Getter private Integer gallowsState = 0;
+    @Getter private GallowsState gallowsState = GallowsState.EMPTY;
 
     public GameLogic(String word, Integer attempts) {
         this.word = word;
@@ -52,6 +53,7 @@ public class GameLogic {
             gameStatus = GameStatus.LOSE;
         }
 
-        gallowsState = (int) Math.floor(((double) (MAX_ATTEMPTS - attempts) / MAX_ATTEMPTS) * 7.0);
+        gallowsState = GallowsState.values()[(int) Math.floor(
+            ((double) (maxAttempts - attempts) / maxAttempts) * GALLOWS_STATES_COUNT)];
     }
 }

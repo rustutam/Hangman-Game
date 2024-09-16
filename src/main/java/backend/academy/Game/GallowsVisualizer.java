@@ -4,9 +4,9 @@ import java.util.HashSet;
 
 public class GallowsVisualizer {
 
-    private void drawGallowsStates(Integer state) {
+    private void drawGallowsStates(GallowsState state) {
         switch (state) {
-            case 0:
+            case EMPTY:
                 System.out.println("  _______");
                 System.out.println(" |");
                 System.out.println(" |");
@@ -16,37 +16,37 @@ public class GallowsVisualizer {
                 System.out.println("_|___");
                 break;
 
-            case 1:
-                System.out.println("  _______");
-                System.out.println(" |      |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println(" |");
-                System.out.println("_|___");
-                break;
-
-            case 2:
+            case ROPE:
                 System.out.println("  _______");
                 System.out.println(" |      |");
-                System.out.println(" |     ( )");
+                System.out.println(" |");
                 System.out.println(" |");
                 System.out.println(" |");
                 System.out.println(" |");
                 System.out.println("_|___");
                 break;
 
-            case 3:
+            case HEAD:
                 System.out.println("  _______");
                 System.out.println(" |      |");
                 System.out.println(" |     ( )");
+                System.out.println(" |");
+                System.out.println(" |");
+                System.out.println(" |");
+                System.out.println("_|___");
+                break;
+
+            case BODY:
+                System.out.println("  _______");
+                System.out.println(" |      |");
+                System.out.println(" |     ( )");
                 System.out.println(" |      |");
                 System.out.println(" |");
                 System.out.println(" |");
                 System.out.println("_|___");
                 break;
 
-            case 4:
+            case ONE_ARM:
                 System.out.println("  _______");
                 System.out.println(" |      |");
                 System.out.println(" |     ( )");
@@ -55,7 +55,7 @@ public class GallowsVisualizer {
                 System.out.println(" |");
                 System.out.println("_|___");
                 break;
-            case 5:
+            case BOTH_ARMS:
                 System.out.println("  _______");
                 System.out.println(" |      |");
                 System.out.println(" |     ( )");
@@ -65,7 +65,7 @@ public class GallowsVisualizer {
                 System.out.println("_|___");
                 break;
 
-            case 6:
+            case ONE_LEG:
                 System.out.println("  _______");
                 System.out.println(" |      |");
                 System.out.println(" |     ( )");
@@ -75,7 +75,7 @@ public class GallowsVisualizer {
                 System.out.println("_|___");
                 break;
 
-            case 7:
+            case FULL_GALLOWS:
                 System.out.println("  _______");
                 System.out.println(" |      |");
                 System.out.println(" |     ( )");
@@ -106,7 +106,7 @@ public class GallowsVisualizer {
     }
 
     public void drawInterface(
-        Integer state,
+        GallowsState state,
         GameStatus gameStatus,
         String hiddenWord,
         String word,
