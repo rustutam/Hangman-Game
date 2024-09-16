@@ -5,11 +5,9 @@ import java.util.List;
 public class SettingsProvider {
     public final int MAX_ATTEMPTS = 7;
 
-    private final List<String> categories;
-    private List<String> levels;
-
     private final InputSettingsProvider inputSettingsProvider;
     private final DictionaryLoader dictionaryLoader;
+    RandomValueProvider randomValueProvider;
 
     public SettingsProvider(
         InputSettingsProvider inputSettingsProvider,
@@ -17,13 +15,15 @@ public class SettingsProvider {
     ) {
         this.inputSettingsProvider = inputSettingsProvider;
         this.dictionaryLoader = dictionaryLoader;
-        categories = dictionaryLoader.getCategoriesList();
     }
 
-    private String getCategory() {
+    private String getCategory(List<String> categoriesList) {
         while (true) {
-            String userInputCategory = inputSettingsProvider.getInputCategory(categories);
-            if (categories.contains(userInputCategory)) {
+            String userInputCategory = inputSettingsProvider.getInputCategory(categoriesList);
+            if (userInputCategory.isEmpty()) {
+                randomValueProvider = new RandomValueProvider(categoriesList);
+                return randomValueProvider.getRandomValue();
+            } else if (categoriesList.contains(userInputCategory)) {
                 return userInputCategory;
             } else {
                 System.out.println("Неверная категория. Выберите из списка.");
@@ -31,10 +31,13 @@ public class SettingsProvider {
         }
     }
 
-    private String getLevel() {
+    private String getLevel(List<String> levelsList) {
         while (true) {
-            String userInputLevel = inputSettingsProvider.getInputLevel(levels);
-            if (levels.contains(userInputLevel)) {
+            String userInputLevel = inputSettingsProvider.getInputLevel(levelsList);
+            if (userInputLevel.isEmpty()) {
+                randomValueProvider = new RandomValueProvider(levelsList);
+                return randomValueProvider.getRandomValue();
+            } else if (levelsList.contains(userInputLevel)) {
                 return userInputLevel;
             } else {
                 System.out.println("Неверный уровень сложности. Выберите из списка.");
@@ -43,11 +46,12 @@ public class SettingsProvider {
     }
 
     public String getWord() {
-        String category = getCategory();
-        levels = dictionaryLoader.getLevelsList(category);
-        String level = getLevel();
+        List<String> categoriesList = dictionaryLoader.getCategoriesList();
+        String category = getCategory(categoriesList);
+        List<String> levelsList = dictionaryLoader.getLevelsList(category);
+        String level = getLevel(levelsList);
         List<String> wordsList = dictionaryLoader.getWordsList(category, level);
-        RandomValueProvider randomValueProvider = new RandomValueProvider(wordsList);
+        randomValueProvider = new RandomValueProvider(wordsList);
         return randomValueProvider.getRandomValue();
     }
 }
