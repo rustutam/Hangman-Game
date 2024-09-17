@@ -37,6 +37,10 @@ public class GameLogic {
     }
 
     public void gameElementsHandler(String inputSymbol) {
+        if (inputSymbol == null || inputSymbol.isEmpty()) {
+            return;
+        }
+
         List<Integer> findIndexes = findSymbolIndexes(word, inputSymbol);
         if (findIndexes.isEmpty()) {
             usedSymbolsSet.add(inputSymbol);
