@@ -1,7 +1,7 @@
 package backend.academy.Game;
 
 import java.io.PrintStream;
-import java.util.HashSet;
+import java.util.Set;
 
 public class GallowsVisualizer {
     private final PrintStream out;
@@ -146,7 +146,7 @@ public class GallowsVisualizer {
         GameStatus gameStatus,
         String hiddenWord,
         String word,
-        HashSet<String> usedSymbolsSet,
+        Set<String> usedSymbolsSet,
         Integer attempts
     ) {
         out.println("\n".repeat(LINE_SEPARATOR_COUNT));

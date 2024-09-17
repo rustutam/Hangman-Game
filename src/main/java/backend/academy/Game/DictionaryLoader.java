@@ -23,7 +23,7 @@ public class DictionaryLoader {
             Path fileToRead = basePath.resolve(filePath).normalize();
 
             if (!fileToRead.startsWith(basePath)) {
-                throw new SecurityException("Недопустимый путь: попытка выхода за пределы разрешенной директории.");
+                throw new SecurityException("Недопустимый путь.");
             }
 
             if (Files.exists(fileToRead)) {
