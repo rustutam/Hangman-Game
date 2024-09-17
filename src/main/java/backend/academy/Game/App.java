@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 
 public class App {
-    String dictionaryPath = "src/main/java/backend/academy/Game/dictionary.json";
+    String dictionaryPath = "Game/dictionary.json";
     DictionaryLoader dictionaryLoader;
     ConsoleInputProvider consoleInputProvider;
     InputSettingsProvider inputSettingsProvider;
@@ -26,7 +26,7 @@ public class App {
 
     public void start() {
         String word = settingsProvider.getWord();
-        Integer maxAttempts = settingsProvider.maxAttempts;
+        Integer maxAttempts = SettingsProvider.MAX_ATTEMPTS;
 
         game.start(word, maxAttempts);
     }

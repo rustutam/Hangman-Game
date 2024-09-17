@@ -2,13 +2,15 @@ package backend.academy.Game;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 
 public class DictionaryLoader {
     private static final String CATEGORIES = "categories";
@@ -17,8 +19,19 @@ public class DictionaryLoader {
     public DictionaryLoader(String filePath, PrintStream out) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            dictionary = objectMapper.readTree(new File(filePath));
-        } catch (IOException e) {
+            Path basePath = Paths.get("src/main/java/backend/academy");
+            Path fileToRead = basePath.resolve(filePath).normalize();
+
+            if (!fileToRead.startsWith(basePath)) {
+                throw new SecurityException("Недопустимый путь: попытка выхода за пределы разрешенной директории.");
+            }
+
+            if (Files.exists(fileToRead)) {
+                dictionary = objectMapper.readTree(fileToRead.toFile());
+            } else {
+                throw new IOException("Файл не существует.");
+            }
+        } catch (IOException | SecurityException | InvalidPathException e) {
             out.println(e.getMessage());
         }
     }

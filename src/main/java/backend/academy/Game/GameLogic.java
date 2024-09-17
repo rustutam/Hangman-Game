@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import lombok.Getter;
 
-
 public class GameLogic {
     private static final double GALLOWS_STATES_COUNT = 7.0;
     private final int maxAttempts;
@@ -13,6 +12,7 @@ public class GameLogic {
     @Getter private Integer attempts;
     @Getter private GameStatus gameStatus = GameStatus.PLAYING;
     @Getter private String hiddenWord;
+    StringBuilder hiddenWordBuilder;
     @Getter private HashSet<String> usedSymbolsSet = new HashSet<>();
     @Getter private GallowsState gallowsState = GallowsState.EMPTY;
 
@@ -21,10 +21,11 @@ public class GameLogic {
         this.maxAttempts = attempts;
         this.attempts = attempts;
         hiddenWord = "_".repeat(word.length());
+        hiddenWordBuilder = new StringBuilder(hiddenWord);
     }
 
     private List<Integer> findSymbolIndexes(String word, String symbol) {
-        List<Integer> indexList = new ArrayList<>();
+        List<Integer> indexList = new ArrayList<>(word.length());
         int index = word.indexOf(symbol);
         while (index >= 0) {
             indexList.add(index);
@@ -42,8 +43,9 @@ public class GameLogic {
             attempts--;
         } else {
             for (Integer index : findIndexes) {
-                hiddenWord = hiddenWord.substring(0, index) + inputSymbol + hiddenWord.substring(index + 1);
+                hiddenWordBuilder.setCharAt(index, inputSymbol.charAt(0));
             }
+            hiddenWord = hiddenWordBuilder.toString();
         }
 
         if (hiddenWord.equals(word)) {

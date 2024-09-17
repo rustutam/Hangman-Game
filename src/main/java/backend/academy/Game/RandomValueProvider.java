@@ -1,11 +1,11 @@
 package backend.academy.Game;
 
+import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
 
 public class RandomValueProvider {
     private final List<String> words;
-    private final Random random = new Random();
+    private final SecureRandom random = new SecureRandom();
 
     public RandomValueProvider(List<String> wordsList) {
         this.words = wordsList;

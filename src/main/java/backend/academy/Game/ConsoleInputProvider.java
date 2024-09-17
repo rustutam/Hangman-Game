@@ -2,6 +2,7 @@ package backend.academy.Game;
 
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ConsoleInputProvider implements InputProvider {
@@ -9,7 +10,7 @@ public class ConsoleInputProvider implements InputProvider {
     private final PrintStream out;
 
     public ConsoleInputProvider(InputStream in, PrintStream out) {
-        this.scanner = new Scanner(in);
+        this.scanner = new Scanner(in, StandardCharsets.UTF_8);
         this.out = out;
     }
 

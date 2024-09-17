@@ -6,7 +6,7 @@ import java.util.List;
 public class SettingsProvider {
     private final PrintStream out;
 
-    public final int maxAttempts = 7;
+    public static final int MAX_ATTEMPTS = 7;
 
     private final InputSettingsProvider inputSettingsProvider;
     private final DictionaryLoader dictionaryLoader;
