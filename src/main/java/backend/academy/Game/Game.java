@@ -24,6 +24,9 @@ public class Game {
     }
 
     public void start(String word, Integer maxAttempts) {
+        if (word == null || word.isEmpty() || maxAttempts == null || maxAttempts <= 0) {
+            throw new IllegalArgumentException("Invalid input parameters");
+        }
         GameLogic gameLogic = new GameLogic(word, maxAttempts);
         while (true) {
             drawGameInterface(gameLogic);
