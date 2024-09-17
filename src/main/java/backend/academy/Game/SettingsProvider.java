@@ -10,7 +10,7 @@ public class SettingsProvider {
 
     private final InputSettingsProvider inputSettingsProvider;
     private final DictionaryLoader dictionaryLoader;
-    RandomValueProvider randomValueProvider;
+    RandomValueProvider randomValueProvider = new RandomValueProvider();
 
     public SettingsProvider(
         PrintStream out,
@@ -26,8 +26,7 @@ public class SettingsProvider {
         while (true) {
             String userInputCategory = inputSettingsProvider.getInputCategory(categoriesList);
             if (userInputCategory.isEmpty()) {
-                randomValueProvider = new RandomValueProvider(categoriesList);
-                return randomValueProvider.getRandomValue();
+                return randomValueProvider.getRandomValue(categoriesList);
             } else if (categoriesList.contains(userInputCategory)) {
                 return userInputCategory;
             } else {
@@ -40,8 +39,7 @@ public class SettingsProvider {
         while (true) {
             String userInputLevel = inputSettingsProvider.getInputLevel(levelsList);
             if (userInputLevel.isEmpty()) {
-                randomValueProvider = new RandomValueProvider(levelsList);
-                return randomValueProvider.getRandomValue();
+                return randomValueProvider.getRandomValue(levelsList);
             } else if (levelsList.contains(userInputLevel)) {
                 return userInputLevel;
             } else {
@@ -56,7 +54,6 @@ public class SettingsProvider {
         List<String> levelsList = dictionaryLoader.getLevelsList(category);
         String level = getLevel(levelsList);
         List<String> wordsList = dictionaryLoader.getWordsList(category, level);
-        randomValueProvider = new RandomValueProvider(wordsList);
-        return randomValueProvider.getRandomValue();
+        return randomValueProvider.getRandomValue(wordsList);
     }
 }
