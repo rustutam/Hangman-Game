@@ -1,11 +1,8 @@
 package backend.academy.Game;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -18,27 +15,22 @@ class AppTest {
 
     @BeforeEach
     void setUp() {
-        InputStream in = new ByteArrayInputStream("".getBytes());
-        PrintStream out = new PrintStream(new ByteArrayOutputStream());
-
         settingsProviderMock = mock(SettingsProvider.class);
         gameMock = mock(Game.class);
 
-        app = new App(in, out);
-        app.settingsProvider = settingsProviderMock;
-        app.game = gameMock;
+        app = new App(settingsProviderMock, gameMock);
     }
 
     @Test
     void testStart() {
         String testWord = "test";
-        int maxAttempts = SettingsProvider.MAX_ATTEMPTS;
 
         when(settingsProviderMock.getWord()).thenReturn(testWord);
+        doNothing().when(gameMock).start(testWord, SettingsProvider.MAX_ATTEMPTS);
 
         app.start();
 
         verify(settingsProviderMock).getWord();
-        verify(gameMock).start(testWord, maxAttempts);
+        verify(gameMock).start(testWord, SettingsProvider.MAX_ATTEMPTS);
     }
 }
