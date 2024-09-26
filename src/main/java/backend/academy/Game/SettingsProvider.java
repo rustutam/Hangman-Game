@@ -4,13 +4,12 @@ import java.io.PrintStream;
 import java.util.List;
 
 public class SettingsProvider {
-    private final PrintStream out;
-
     public static final int MAX_ATTEMPTS = 7;
 
+    private final PrintStream out;
     private final InputSettingsProvider inputSettingsProvider;
     private final DictionaryLoader dictionaryLoader;
-    RandomValueProvider randomValueProvider = new RandomValueProvider();
+    private final RandomValueProvider randomValueProvider = new RandomValueProvider();
 
     public SettingsProvider(
         PrintStream out,

@@ -7,14 +7,16 @@ import lombok.Getter;
 
 public class GameLogic {
     private static final double GALLOWS_STATES_COUNT = 7.0;
-    private final int maxAttempts;
+
     @Getter private final String word;
     @Getter private Integer attempts;
     @Getter private GameStatus gameStatus = GameStatus.PLAYING;
     @Getter private String hiddenWord;
-    StringBuilder hiddenWordBuilder;
     @Getter private HashSet<String> usedSymbolsSet = new HashSet<>();
     @Getter private GallowsState gallowsState = GallowsState.EMPTY;
+
+    private final int maxAttempts;
+    private final StringBuilder hiddenWordBuilder;
 
     public GameLogic(String word, Integer attempts) {
         this.word = word;

@@ -1,7 +1,7 @@
 package backend.academy.Game;
 
 public class InputGameProvider {
-    InputProvider inputProvider;
+    private final InputProvider inputProvider;
 
     public InputGameProvider(InputProvider inputProvider) {
         this.inputProvider = inputProvider;

@@ -3,7 +3,7 @@ package backend.academy.Game;
 import java.util.List;
 
 public class InputSettingsProvider {
-    InputProvider inputProvider;
+    private final InputProvider inputProvider;
 
     public InputSettingsProvider(InputProvider inputProvider) {
         this.inputProvider = inputProvider;

@@ -4,8 +4,9 @@ import java.io.PrintStream;
 import java.util.Set;
 
 public class GallowsVisualizer {
-    private final PrintStream out;
     private static final int LINE_SEPARATOR_COUNT = 20;
+
+    private final PrintStream out;
 
     public GallowsVisualizer(PrintStream out) {
         this.out = out;
