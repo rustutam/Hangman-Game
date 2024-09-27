@@ -33,10 +33,10 @@ class SettingsProviderTest {
 
     @Test
     void testGetWord() {
+        // Arrange
         List<String> categories = Arrays.asList("ANIMALS", "COUNTRIES", "FRUITS");
         List<String> levels = Arrays.asList("EASY", "MEDIUM", "HARD");
         List<String> words = Arrays.asList("КИТАЙ", "РОССИЯ", "США");
-
         when(dictionaryLoader.getCategoriesList()).thenReturn(categories);
         when(inputSettingsProvider.getInputCategory(categories)).thenReturn("COUNTRIES");
         when(dictionaryLoader.getLevelsList("COUNTRIES")).thenReturn(levels);
@@ -44,13 +44,16 @@ class SettingsProviderTest {
         when(dictionaryLoader.getWordsList("COUNTRIES", "MEDIUM")).thenReturn(words);
         when(randomValueProvider.getRandomValue(words)).thenReturn("РОССИЯ");
 
+        // Act
         String word = settingsProvider.getWord();
 
+        // Assert
         assertEquals("РОССИЯ", word);
     }
 
     @Test
     void testGetWordWithEmptyUserInput() {
+        // Arrange
         List<String> categories = Arrays.asList("ANIMALS", "COUNTRIES", "FRUITS");
         List<String> levels = Arrays.asList("EASY", "MEDIUM", "HARD");
         List<String> words = Arrays.asList("КИТАЙ", "РОССИЯ", "США");
@@ -66,13 +69,16 @@ class SettingsProviderTest {
         when(dictionaryLoader.getWordsList("COUNTRIES", "HARD")).thenReturn(words);
         when(randomValueProvider.getRandomValue(words)).thenReturn("РОССИЯ");
 
+        // Act
         String word = settingsProvider.getWord();
 
+        // Assert
         assertEquals("РОССИЯ", word);
     }
 
     @Test
     void testGetWordWithInvalidUserInput() {
+        // Arrange
         List<String> categories = Arrays.asList("ANIMALS", "COUNTRIES", "FRUITS");
         List<String> levels = Arrays.asList("EASY", "MEDIUM", "HARD");
         List<String> words = Arrays.asList("КИТАЙ", "РОССИЯ", "США");
@@ -88,10 +94,27 @@ class SettingsProviderTest {
         when(dictionaryLoader.getWordsList("COUNTRIES", "MEDIUM")).thenReturn(words);
         when(randomValueProvider.getRandomValue(words)).thenReturn("РОССИЯ");
 
+        // Act
         String word = settingsProvider.getWord();
+
+        // Assert
         verify(out).println("Неверная категория. Выберите из списка.");
         verify(out).println("Неверный уровень сложности. Выберите из списка.");
         assertEquals("РОССИЯ", word);
-
     }
+
+    @Test
+    void testGetHint() {
+        // Arrange
+        String word = "РОССИЯ";
+        String expectedHint = "Страна в Восточной Европе и Северной Азии";
+        when(dictionaryLoader.getHint(word)).thenReturn(expectedHint);
+
+        // Act
+        String hint = settingsProvider.getHint(word);
+
+        // Assert
+        assertEquals(expectedHint, hint);
+    }
+
 }

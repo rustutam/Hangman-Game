@@ -22,9 +22,13 @@ class ConsoleInputProviderTest {
 
     @Test
     void testGetInput() {
+        // Arrange
         String message = "Enter input:";
+
+        // Act
         String result = consoleInputProvider.getInput(message);
 
+        // Assert
         assertEquals("T", result);
         assertEquals(message + " ", out.toString());
     }
