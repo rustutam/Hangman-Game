@@ -1,7 +1,6 @@
 package backend.academy.Game;
 
 import java.io.PrintStream;
-import java.util.Set;
 
 public class GallowsVisualizer {
     private static final int LINE_SEPARATOR_COUNT = 20;
@@ -142,20 +141,18 @@ public class GallowsVisualizer {
         }
     }
 
-    public void drawInterface(
-        GallowsState state,
-        GameStatus gameStatus,
-        String hiddenWord,
-        String word,
-        Set<String> usedSymbolsSet,
-        Integer attempts
-    ) {
+    public void drawInterface(GameInterfaceData data) {
         out.println("\n".repeat(LINE_SEPARATOR_COUNT));
         out.println("Игра виселица");
-        out.println("Слово: " + hiddenWord);
-        out.println("Использованные символы: " + usedSymbolsSet);
-        drawGallowsStates(state);
-        displayGameStatus(gameStatus, attempts, word);
+        out.println("Слово: " + data.hiddenWord());
+        out.println("Использованные символы: " + data.usedSymbolsSet());
+        if (data.hintUsed()) {
+            out.println("Подсказка: " + data.hint());
+        } else {
+            out.println("Для получения подсказки введите 'подсказка'");
+        }
+        drawGallowsStates(data.state());
+        displayGameStatus(data.gameStatus(), data.attempts(), data.word());
     }
 }
 

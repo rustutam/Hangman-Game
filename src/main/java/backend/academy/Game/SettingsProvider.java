@@ -55,4 +55,8 @@ public class SettingsProvider {
         List<String> wordsList = dictionaryLoader.getWordsList(category, level);
         return randomValueProvider.getRandomValue(wordsList);
     }
+
+    public String getHint(String word) {
+        return dictionaryLoader.getHint(word);
+    }
 }

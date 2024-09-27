@@ -68,4 +68,8 @@ public class DictionaryLoader {
         }
         return words;
     }
+
+    public String getHint(String word) {
+        return dictionary.path("hints").path(word).asText();
+    }
 }
